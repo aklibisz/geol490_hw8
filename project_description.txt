@@ -1,0 +1,36 @@
+PROJECT DESCRIPTION
+
+Part 1: Create a Shiny data explorer app under git version control
+
+The assigment is simple: 
+Create a data explorer app in Shiny (i.e., an app to interactively visualize a data frame). 
+You can recreate the app that I have shown in class (git repo here; hosted on shinyapps.io here). 
+Better yet, find your own dataset and create an analagous data explorer app that does the following:
+
+- Has a range slider
+- Allows the user to select which column to map to which aesthetic
+- Doesn’t create the plot until the user presses a “go” button
+- Build the app piece-by-piece, under git version control
+
+You should build up the app piece-by-piece, as we have done in class. We will know that you have done it that way, because your app should:
+
+- have a git repository
+- the git repository should be on github
+- there should be a record of your development in the git commits, each of which should have a clear, informative commit message
+
+Part 2: Improve your partner’s app
+
+Find a partner, and make a meaningful (if small) change to their app. Do this as follows:
+
+- fork their github repo
+- git clone your fork of their repo to your computer
+- make some changes and commit them
+- git push origin master your repo back to github
+- issue a pull request using the button on github
+- your partner should accept the pull request and successfully incorporate the change
+
+Note: All this will be much easier if you and your partner agree on the timing: 
+the partner should not make changes to their shiny app while you are forking, cloning, pushing, and issuing the pull request. 
+Otherwise you may encounter git conflicts, which can be a pain to resolve.
+
+Source: https://adsteen.github.io/490_590_2019/2019/10/25/homework-8-git-github-and-shiny/
