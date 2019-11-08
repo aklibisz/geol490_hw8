@@ -11,8 +11,6 @@ min.mpg <- min(mtcars$mpg)
 max.mpg <- max(mtcars$mpg)
 
 axis_vars <- names(mtcars)
-factor.indices <- vapply(mtcars, is.factor, TRUE)
-factor.columns <- axis_vars[factor.indices]
 
 
 # Define UI 
