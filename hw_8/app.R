@@ -10,7 +10,12 @@ library(tidyverse)
 min.mpg <- min(mtcars$mpg)
 max.mpg <- max(mtcars$mpg)
 
-# Define UI for application that draws a histogram
+axis_vars <- names(mtcars)
+factor.indices <- vapply(mtcars, is.factor, TRUE)
+factor.columns <- axis_vars[factor.indices]
+
+
+# Define UI 
 ui <- fluidPage(
 
     # Application title
@@ -24,13 +29,23 @@ ui <- fluidPage(
                         min = min.mpg,
                         max = max.mpg,
                         value = c(min.mpg, max.mpg)),
+            
+            # Select x and y variables
+            selectInput(inputId = "xvar",
+                        label = "X axis",
+                        choices = axis_vars,
+                        selected = "x"),
+            
+            selectInput(inputId = "yvar",
+                        label = "Y axis",
+                        choices = axis_vars,
+                        selected = "y"),
     
-        actionButton("go", 
-                     "Go!",
-                     icon = icon("thumbs-up"))
+        actionButton("go", " ",
+                     icon = icon("power-off"))
         ),
 
-        # Show a plot of the generated distribution
+        # Show a plot 
         mainPanel(
            plotOutput("distPlot")
         )
