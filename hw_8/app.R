@@ -2,11 +2,13 @@
 # Adam Klibisz Geol 490 HW8
 ####
 
+# Shiny app viewer of the R dataset "mtcars"
+
 # necessary libraries
 library(shiny)
 library(tidyverse)
 
-# limit the range of selectable MPG to the actual range of MPG
+# limit the range of selectable mpg to the actual range of mpg
 min.mpg <- min(mtcars$mpg)
 max.mpg <- max(mtcars$mpg)
 
@@ -23,7 +25,8 @@ ui <- fluidPage(
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            
+          
+          #range slider 
           sliderInput("mpgRange",
                         "Range of MPG",
                         min = min.mpg,
@@ -40,7 +43,8 @@ ui <- fluidPage(
                         label = "Y axis",
                         choices = axis_vars,
                         selected = "y"),
-    
+        
+        # make the action button
         actionButton("go", " ",
                      icon = icon("power-off"))
         ),
@@ -52,7 +56,7 @@ ui <- fluidPage(
     )
 )
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw the plot
 server <- function(input, output) {
   
   # filter mtcars based on mpg
@@ -63,8 +67,8 @@ server <- function(input, output) {
   })
 
     p_mtcars <- eventReactive(input$go, {
-      ggplot(filt_mtcars(), aes_string(x = input$xvar, y = input$yvar, colour = input$color)) + # Note that you need () after filt_dia, since filt_dia() is a function to get the object you want, not the actual object
-        geom_point()
+      ggplot(filt_mtcars(), aes_string(x = input$xvar, y = input$yvar)) + 
+        geom_line()
 
     })
     
