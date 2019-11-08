@@ -9,8 +9,8 @@ library(shiny)
 library(tidyverse)
 
 # limit the range of selectable mpg to the actual range of mpg
-min.mpg <- min(mtcars$mpg)
-max.mpg <- max(mtcars$mpg)
+min.cyl <- min(mtcars$cyl)
+max.cyl <- max(mtcars$cyl)
 
 # vector of axis variables as characters
 axis_vars <- names(mtcars)
@@ -28,10 +28,10 @@ ui <- fluidPage(
           
           #range slider 
           sliderInput("mpgRange",
-                        "Range of MPG",
-                        min = min.mpg,
-                        max = max.mpg,
-                        value = c(min.mpg, max.mpg)),
+                        "Range of Cylinders",
+                        min = min.cyl,
+                        max = max.cyl,
+                        value = c(min.cyl, max.cyl)),
             
             # Select x and y variables
             selectInput(inputId = "xvar",
@@ -62,8 +62,8 @@ server <- function(input, output) {
   # filter mtcars based on mpg
   filt_mtcars <- reactive({
     mtcars %>%
-      filter(mpg >= min(input$mpgrange)) %>%
-      filter(mpg <= max(input$mpgrange))
+      filter(cyl >= min(input$cylrange)) %>%
+      filter(cyl <= max(input$cylrange))
   })
 
     p_mtcars <- eventReactive(input$go, {
@@ -74,7 +74,7 @@ server <- function(input, output) {
     
     #output window
     output$diagnostic <- renderText(
-      input$mpgrange
+      input$cylrange
     )
     
     #dynamic plot plot
