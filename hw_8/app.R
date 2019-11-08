@@ -59,7 +59,7 @@ ui <- fluidPage(
 # Define server logic required to draw the plot
 server <- function(input, output) {
   
-  # filter mtcars based on MPG
+  # filter mtcars based on mpg
   filt_mtcars <- reactive({
     mtcars %>%
       filter(mpg >= min(input$mpgrange)) %>%
