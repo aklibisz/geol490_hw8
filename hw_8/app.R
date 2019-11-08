@@ -47,7 +47,7 @@ ui <- fluidPage(
 
         # Show a plot 
         mainPanel(
-           plotOutput("mpgPlot")
+           plotOutput("mtcars_plot")
         )
     )
 )
@@ -67,6 +67,16 @@ server <- function(input, output) {
         geom_point()
 
     })
+    
+    #output window
+    output$diagnostic <- renderText(
+      input$mpgrange
+    )
+    
+    #dynamic plot plot
+    output$mtcars_plot <- renderPlot(
+      p_mtcars()
+    )
     
 }
 
