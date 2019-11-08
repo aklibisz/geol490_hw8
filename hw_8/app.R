@@ -68,7 +68,8 @@ server <- function(input, output) {
 
     p_mtcars <- eventReactive(input$go, {
       ggplot(filt_mtcars(), aes_string(x = input$xvar, y = input$yvar)) + 
-        geom_line()
+        geom_line() +
+        geom_point()
 
     })
     
