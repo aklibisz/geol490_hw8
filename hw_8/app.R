@@ -2,7 +2,7 @@
 # Adam Klibisz Geol 490 HW8
 ####
 
-# some stuff to run before anything else
+# necessary libraries
 library(shiny)
 library(tidyverse)
 
@@ -10,19 +10,21 @@ library(tidyverse)
 min.mpg <- min(mtcars$mpg)
 max.mpg <- max(mtcars$mpg)
 
+# vector of axis variables as characters
 axis_vars <- names(mtcars)
 
 
 # Define UI 
 ui <- fluidPage(
 
-    # Application title
+    # title
     titlePanel("Mtcars Viewer"),
 
     # Sidebar with a slider input for number of bins 
     sidebarLayout(
         sidebarPanel(
-            sliderInput("mpgRange",
+            
+          sliderInput("mpgRange",
                         "Range of MPG",
                         min = min.mpg,
                         max = max.mpg,
@@ -45,16 +47,28 @@ ui <- fluidPage(
 
         # Show a plot 
         mainPanel(
-           plotOutput("distPlot")
+           plotOutput("mpgPlot")
         )
     )
 )
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
+  
+  # filter mtcars based on mpg
+  filt_mtcars <- reactive({
+    mtcars %>%
+      filter(mpg >= min(input$mpgrange)) %>%
+      filter(mpg <= max(input$mpgrange))
+  })
 
+    p_mtcars <- eventReactive(input$go, {
+      ggplot(filt_mtcars(), aes_string(x = input$xvar, y = input$yvar, colour = input$color)) + # Note that you need () after filt_dia, since filt_dia() is a function to get the object you want, not the actual object
+        geom_point()
 
-    }
+    })
+    
+}
 
 # Run the application 
 shinyApp(ui = ui, server = server)
